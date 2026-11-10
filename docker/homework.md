@@ -113,6 +113,19 @@ services:
 ![Скриншот 15](https://github.com/Avdey87/devops-netology/blob/main/docker/port_4.jpg)
 ![Скриншот 16](https://github.com/Avdey87/devops-netology/blob/main/docker/port_5.jpg)
 ![Скриншот 17](https://github.com/Avdey87/devops-netology/blob/main/docker/port_6.jpg)
+
+### 5.6. Удаление манифеста и суть предупреждения (Warning)
+Был удален файл `compose.yaml`, после чего выполнена команда `docker compose up -d`. Появилось предупреждение об "orphan containers" (контейнерах-сиротах). 
+
+**Суть предупреждения:** 
+После удаления `compose.yaml`, Docker Compose стал использовать оставшийся `docker-compose.yaml`. В нем описан только сервис `registry`. Однако контейнер `portainer` остался запущенным с прошлого раза, так как о нем больше нет информации в конфигурации. Docker распознал его как «сироту» — контейнер, который относится к текущему проекту, но отсутствует в актуальном файле конфигурации. 
+
+[Скриншот с Warning]
+
+### 5.7. Завершение проекта
+Проект погашен **одной** командой с флагом `--remove-orphans`, чтобы удалить и контейнеры, описанные в конфиге, и контейнеры-сироты:
+```bash
+docker compose down --remove-orphans
 ![Скриншот 18](https://github.com/Avdey87/devops-netology/blob/main/docker/port_7.jpg)
 в macOS network_mode: host не пробрасывает порты на хост-машину, поэтому для проверки в браузере на Mac использовался временный маппинг портов
 
