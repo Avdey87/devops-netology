@@ -9,7 +9,9 @@
 *   Собран образ `custom-nginx:1.0.0` и отправлен в публичный репозиторий Docker Hub.
 
 **Ссылка на репозиторий Docker Hub:** 
-[Ссылка на ваш репозиторий custom-nginx](https://hub.docker.com/repository/docker/emik1987/custom-nginx/general)
+[Ссылка на ваш репозиторий dockerhub](https://hub.docker.com/repository/docker/emik1987/custom-nginx/general)
+
+[Ссылка на dockerfile](https://github.com/Avdey87/devops-netology/blob/main/docker/Dockerfile)
 
 **Результат выполнения:**
 ![Скриншот 1](https://github.com/Avdey87/devops-netology/blob/main/docker/docker_1.jpg)
