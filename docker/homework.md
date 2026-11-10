@@ -125,7 +125,8 @@ services:
 ### 5.7. Завершение проекта
 Проект погашен **одной** командой с флагом `--remove-orphans`, чтобы удалить и контейнеры, описанные в конфиге, и контейнеры-сироты:
 ```bash
-docker compose down --remove-orphans
+docker compose down --remove-orphan
+```
 ![Скриншот 18](https://github.com/Avdey87/devops-netology/blob/main/docker/port_7.jpg)
-в macOS network_mode: host не пробрасывает порты на хост-машину, поэтому для проверки в браузере на Mac использовался временный маппинг портов
+
 
