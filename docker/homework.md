@@ -103,8 +103,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
-![Скриншот 10](https://github.com/Avdey87/devops-netology/blob/main/docker/docker_5-1.jpg)
-![Скриншот 11](https://github.com/Avdey87/devops-netology/blob/main/docker/docker_5-2.jpg)
+![Скриншот 10](https://github.com/Avdey87/devops-netology/blob/main/docker/push_image.jpg)
 
 в macOS network_mode: host не пробрасывает порты на хост-машину, поэтому для проверки в браузере на Mac использовался временный маппинг портов
 
