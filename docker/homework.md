@@ -107,5 +107,12 @@ services:
 ![Скриншот 10](https://github.com/Avdey87/devops-netology/blob/main/docker/portainer_2.jpg)
 ![Скриншот 11](https://github.com/Avdey87/devops-netology/blob/main/docker/push_image.jpg)
 
+![Скриншот 12](https://github.com/Avdey87/devops-netology/blob/main/docker/port_1.jpg)
+![Скриншот 13](https://github.com/Avdey87/devops-netology/blob/main/docker/port_2.jpg)
+![Скриншот 14](https://github.com/Avdey87/devops-netology/blob/main/docker/port_3.jpg)
+![Скриншот 15](https://github.com/Avdey87/devops-netology/blob/main/docker/port_4.jpg)
+![Скриншот 16](https://github.com/Avdey87/devops-netology/blob/main/docker/port_5.jpg)
+![Скриншот 17](https://github.com/Avdey87/devops-netology/blob/main/docker/port_6.jpg)
+![Скриншот 18](https://github.com/Avdey87/devops-netology/blob/main/docker/port_7.jpg)
 в macOS network_mode: host не пробрасывает порты на хост-машину, поэтому для проверки в браузере на Mac использовался временный маппинг портов
 
