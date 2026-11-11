@@ -1,53 +1,76 @@
-Своё решение к задачам оформите в вашем GitHub репозитории!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Задача 1
-Сделайте в своем GitHub пространстве fork репозитория.
 
-Создайте файл Dockerfile.python на основе существующего Dockerfile:
+**Ссылка на форк-репозиторий:** [https://github.com/Avdey87/shvirtd-example-python](https://github.com/Avdey87/shvirtd-example-python)
 
-Используйте базовый образ python:3.12-slim
-Обязательно используйте конструкцию COPY . . в Dockerfile
-Создайте .dockerignore файл для исключения ненужных файлов
-Используйте CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"] для запуска
-Протестируйте корректность сборки 2.1 Используйте multistage сборку вместо single stage.
-(Необязательная часть, *) Изучите инструкцию в проекте и запустите web-приложение без использования docker, с помощью venv. (Mysql БД можно запустить в docker run).
+---
 
-(Необязательная часть, *) Изучите код приложения и добавьте управление названием таблицы через ENV переменную.
+## 📌 Задача 1. Сборка приложения и Multistage
 
-ВНИМАНИЕ!
-!!! В процессе последующего выполнения ДЗ НЕ изменяйте содержимое файлов в fork-репозитории! Ваша задача ДОБАВИТЬ 5 файлов: Dockerfile.python, compose.yaml, .gitignore, .dockerignore,bash-скрипт. Если вам понадобилось внести иные изменения в проект - вы что-то делаете неверно!
-![1](https://github.com/Avdey87/devops-netology/blob/main/docker_2/task_1.jpg)
+> **Условие:** Создайте файл `Dockerfile.python` на основе существующего Dockerfile. Используйте базовый образ `python:3.12-slim`, конструкцию `COPY . .`, создайте `.dockerignore` и используйте `CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]`. Протестируйте сборку. Используйте multistage сборку.
 
+**Выполнение:**
+* Создан `Dockerfile.python` с использованием двух этапов (builder и финальный образ) для уменьшения размера.
+* Создан `.dockerignore` для исключения кэша, виртуальных окружений и лишних файлов.
+* Образ успешно собран, приложение запускается и слушает порт 5000. 
+* *Примечание:* Ошибка подключения к MySQL на этом этапе ожидаема, так как БД еще не запущена.
 
-Задача 3
-Изучите файл "proxy.yaml"
-Создайте в репозитории с проектом файл compose.yaml. С помощью директивы "include" подключите к нему файл "proxy.yaml".
-Опишите в файле compose.yaml следующие сервисы:
-web. Образ приложения должен ИЛИ собираться при запуске compose из файла Dockerfile.python ИЛИ скачиваться из yandex cloud container registry(из задание №2 со *). Контейнер должен работать в bridge-сети с названием backend и иметь фиксированный ipv4-адрес 172.20.0.5. Сервис должен всегда перезапускаться в случае ошибок. Передайте необходимые ENV-переменные для подключения к Mysql базе данных по сетевому имени сервиса web
+![Задача 1 - Сборка Dockerfile](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/task_1.jpg)
 
-db. image=mysql:8. Контейнер должен работать в bridge-сети с названием backend и иметь фиксированный ipv4-адрес 172.20.0.10. Явно перезапуск сервиса в случае ошибок. Передайте необходимые ENV-переменные для создания: пароля root пользователя, создания базы данных, пользователя и пароля для web-приложения.Обязательно используйте уже существующий .env file для назначения секретных ENV-переменных!
+---
 
-Запустите проект локально с помощью docker compose , добейтесь его стабильной работы: команда curl -L http://127.0.0.1:8090 должна возвращать в качестве ответа время и локальный IP-адрес. Если сервисы не стартуют воспользуйтесь командами: docker ps -a  и docker logs <container_name> . Если вместо IP-адреса вы получаете информационную ошибку --убедитесь, что вы шлете запрос на порт 8090, а не 5000.
+## 📌 Задача 3. Docker Compose и работа с БД
 
-Подключитесь к БД mysql с помощью команды docker exec -ti <имя_контейнера> mysql -uroot -p<пароль root-пользователя>(обратите внимание что между ключем -u и логином root нет пробела. это важно!!! тоже самое с паролем) . Введите последовательно команды (не забываем в конце символ ; ): show databases; use <имя вашей базы данных(по-умолчанию virtd, как это указано в .env)>; show tables; SELECT * from requests LIMIT 10;. Примечание: таблица в БД создается после первого поступившего запроса к приложению.
+> **Условие:** Создайте `compose.yaml`, подключите `proxy.yaml` через `include`. Опишите сервисы `web` и `db` в bridge-сети `backend` с фиксированными IP (172.20.0.5 и 172.20.0.10). Используйте `.env` для секретов. Добейтесь ответа от `curl -L http://127.0.0.1:8090`. Подключитесь к БД и сделайте SQL-запрос.
 
-Остановите проект. В качестве ответа приложите скриншот sql-запроса.
-![2](https://github.com/Avdey87/devops-netology/blob/main/docker_2/task_3.jpg)
+**Выполнение:**
+* Написан `compose.yaml` с использованием директивы `include` и пробросом портов.
+* Сервисы запущены в изолированной сети `backend` со статическими IP.
+* Переменные окружения проброшены из существующего `.env` файла.
+* Команда `curl -L http://127.0.0.1:8090` успешно возвращает время и IP-адрес.
+* Выполнен вход в контейнер MySQL и сделан SQL-запрос к таблице `requests`.
 
-Задача 4
-Запустите в Yandex Cloud ВМ (вам хватит 2 Гб Ram).
-Подключитесь к Вм по ssh и установите docker.
-Напишите bash-скрипт, который скачает ваш fork-репозиторий в каталог /opt и запустит проект целиком.
-Зайдите на сайт проверки http подключений, например(или аналогичный): https://check-host.net/check-http и запустите проверку вашего сервиса http://<внешний_IP-адрес_вашей_ВМ>:8090. Таким образом трафик будет направлен в ingress-proxy. Трафик должен пройти через цепочки: Пользователь → Internet → Nginx → HAProxy → FastAPI(запись в БД) → HAProxy → Nginx → Internet → Пользователь
-(Необязательная часть) Дополнительно настройте remote ssh context к вашему серверу. Отобразите список контекстов и результат удаленного выполнения docker ps -a
-Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
-![3](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d-3.jpg)
-![4](https://github.com/Avdey87/devops-netology/blob/main/docker_2/D-3-1.jpg)
-![5](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_3-2.jpg)
-![6](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_3.jpg) 
-![7](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_4-1.jpg) 
+![Задача 3 - SQL Запрос](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/task_3.jpg)
 
-https://github.com/Avdey87/shvirtd-example-python
+---
 
+## 📌 Задача 4. Развертывание в Yandex Cloud
 
-Задача 6
-Скачайте docker образ hashicorp/terraform:latest и скопируйте бинарный файл /bin/terraform на свою локальную машину, используя dive и docker save. Предоставьте скриншоты действий .
+> **Условие:** Запустите ВМ в Yandex Cloud (2 Гб RAM). Установите Docker. Напишите bash-скрипт для скачивания форка в `/opt` и запуска проекта. Проверьте сервис через `check-host.net`. Повторите SQL-запрос.
+
+**Выполнение:**
+* Инфраструктура в Yandex Cloud развернута с помощью **Terraform** (создана ВМ, сеть, подсеть и security group с открытыми портами 22 и 8090).
+* Написан bash-скрипт `deploy.sh`, который клонирует репозиторий в `/opt` и запускает `docker compose`.
+* Сайт `check-host.net` подтвердил доступность сервиса по адресу `http://51.250.10.3:8090` из десятков стран мира (код `200 OK`).
+* Выполнен повторный SQL-запрос на сервере. В таблице зафиксированы записи с внешних IP-адресов.
+
+**Скриншоты выполнения:**
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d-3.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/D-3-1.jpg" width="48%" />
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d_3-2.jpg" width="48%" />
+  <img src="https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d_3.jpg" width="48%" />
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d_4-1.jpg" width="80%" />
+</p>
+
+---
+
+## 📌 Задача 6. Извлечение бинарного файла Terraform
+
+> **Условие:** Скачайте docker образ `hashicorp/terraform:latest` и скопируйте бинарный файл `/bin/terraform` на свою локальную машину, используя `dive` и `docker save`. Предоставьте скриншоты действий.
+
+**Выполнение:**
+* Образ скачан и проанализирован с помощью утилиты `dive`.
+* Образ сохранен в tar-архив с помощью `docker save`.
+* Архив распакован, из слоев извлечен бинарный файл `/bin/terraform`.
+* При попытке запуска на macOS возникает ошибка `exec format error`, так как бинарник собран под Linux (ELF). Файл успешно скопирован, его валидность подтверждена (размер и тип файла).
+
+![Задача 6 - Анализ образа](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d-6.jpg)
+![Задача 6 - Сохранение образа](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d-6-1.jpg)
+![Задача 6 - Извлечение файла](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d_6-1.jpg)
+![Задача 6 - Проверка файла](https://raw.githubusercontent.com/Avdey87/devops-netology/main/docker_2/d_6-2.jpg)
+
+---
