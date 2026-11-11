@@ -40,6 +40,14 @@ db. image=mysql:8. Контейнер должен работать в bridge-с
 Зайдите на сайт проверки http подключений, например(или аналогичный): https://check-host.net/check-http и запустите проверку вашего сервиса http://<внешний_IP-адрес_вашей_ВМ>:8090. Таким образом трафик будет направлен в ingress-proxy. Трафик должен пройти через цепочки: Пользователь → Internet → Nginx → HAProxy → FastAPI(запись в БД) → HAProxy → Nginx → Internet → Пользователь
 (Необязательная часть) Дополнительно настройте remote ssh context к вашему серверу. Отобразите список контекстов и результат удаленного выполнения docker ps -a
 Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
+![3](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d-3.jpg)
+![4](https://github.com/Avdey87/devops-netology/blob/main/docker_2/D-3-1.jpg)
+![5](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_3-2.jpg)
+![6](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_3.jpg) 
+![7](https://github.com/Avdey87/devops-netology/blob/main/docker_2/d_4-1.jpg) 
+
+https://github.com/Avdey87/shvirtd-example-python
+
 
 Задача 6
 Скачайте docker образ hashicorp/terraform:latest и скопируйте бинарный файл /bin/terraform на свою локальную машину, используя dive и docker save. Предоставьте скриншоты действий .
