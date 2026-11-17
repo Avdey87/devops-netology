@@ -1,0 +1,3 @@
+cloud_id  = "b1gdqn10p629idqen0vi"
+folder_id = "b1gfdbjn3ds15ao34uq1"   # <- подставьте ваш реальный folder_id
+vms_ssh_public_root_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGPv9t9EI/zZlyzI51XgR03okBYlxZNRI8GlgFje7v/0 avdey@MacBookPro"
