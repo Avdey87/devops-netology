@@ -73,7 +73,7 @@ variable "vm_db_platform_id" {
 
 variable "vm_db_zone" {
   type    = string
-  default = "ru-central1-b"
+  default = "ru-central1-d"
 }
 
 variable "vm_db_cores" {
