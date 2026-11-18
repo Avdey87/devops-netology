@@ -25,6 +25,46 @@
 Объявите в файле outputs.tf один output , содержащий: instance_name, external_ip, fqdn для каждой из ВМ в удобном лично для вас формате.(без хардкода!!!)
 Примените изменения.
 В качестве решения приложите вывод значений ip-адресов команды terraform output.
+erraform output -json
+{
+  "vms_info": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "db": [
+          "object",
+          {
+            "external_ip": "string",
+            "fqdn": "string",
+            "instance_name": "string"
+          }
+        ],
+        "web": [
+          "object",
+          {
+            "external_ip": "string",
+            "fqdn": "string",
+            "instance_name": "string"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "db": {
+        "external_ip": "153.51.169.32",
+        "fqdn": "fv440mjnfjn8na6ufpo7.auto.internal",
+        "instance_name": "netology-develop-platform-db"
+      },
+      "web": {
+        "external_ip": "51.250.2.65",
+        "fqdn": "fhmu6mprs9ipmls3bagj.auto.internal",
+        "instance_name": "netology-develop-platform-web"
+      }
+    }
+  }
+}
+
 
 Задание 5
 В файле locals.tf опишите в одном local-блоке имя каждой ВМ, используйте интерполяцию ${..} с НЕСКОЛЬКИМИ переменными по примеру из лекции.
