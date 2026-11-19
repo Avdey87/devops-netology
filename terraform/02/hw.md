@@ -108,5 +108,5 @@ metadata = {
 Найдите и закоментируйте все, более не используемые переменные проекта.
 
 Проверьте terraform plan. Изменений быть не должно.
-![3](https://github.com/Avdey87/devops-netology/blob/main/terraform/02/img/lk_two_vms.jpg)
-![4](https://github.com/Avdey87/devops-netology/blob/main/terraform/02/img/url_ifconfig.jpg)
+![3](https://github.com/Avdey87/devops-netology/blob/main/terraform/02/img/lk_two_vms2.jpg)
+![5](https://github.com/Avdey87/devops-netology/blob/main/terraform/02/img/terraform_output.jpg)
